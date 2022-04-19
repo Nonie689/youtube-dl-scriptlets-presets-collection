@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-youtube-dl --no-warnings --ignore-config --age-limit --audio-format  mp3 --audio-quality 7 --retries 40 --verbose -x "${@}"
+youtube-dl --no-warnings --ignore-config --audio-format  mp3 --audio-quality 7 --retries 40 --verbose --no-part --age-limit 18 -x "${@}"
