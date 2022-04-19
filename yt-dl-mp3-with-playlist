@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
 
-youtube-dl --no-warnings --ignore-config --audio-format  mp3 --audio-quality 7 --retries 40 --verbose --no-part --age-limit 18 -x "${@}"
+basedir=$(dirname $0)
+if ! ls $basedir/cookie_content.txt &> /dev/null ; then
+  python $basedir/get-session-cookie.py | awk '$1=$1' FS="': '" OFS=":" | awk  -F "'" '{print  $2 $3 $4 $5 $6}' | sed 's/, / --add-header /g' > $basedir/cookie_content.txt
+fi
+
+youtube-dl --rm-cache-dir
+youtube-dl --no-warnings --ignore-config --ignore-errors --audio-format  mp3 --audio-quality 7 --retries 40 --verbose --no-part --age-limit 16 --add-header $(cat $basedir/cookie_content.txt) --no-overwrites --no-cache-dir -x "${@}"

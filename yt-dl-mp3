@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 url=$(echo ${@} | awk -F '&list=' '{print $1}')
 
-youtube-dl --no-warnings --ignore-config --audio-format  mp3 --audio-quality 7 --retries 40 --verbose -x "${url}"
+youtube-dl --rm-cache-dir
+youtube-dl --no-warnings --ignore-config --audio-format  mp3 --audio-quality 7 --retries 40 --verbose --no-cache-dir -x "${url}"
