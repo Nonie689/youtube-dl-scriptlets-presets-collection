@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+youtube-dl --no-warnings --ignore-config --audio-format  mp3 --audio-quality 7 --retries 40 --verbose -x "${@}"
