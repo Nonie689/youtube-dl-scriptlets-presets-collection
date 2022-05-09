@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+youtube-dl --rm-cache-dir
+youtube-dl --no-warnings --ignore-config --ignore-errors -f 'bestvideo[height=480][ext=mp4]+bestaudio[ext=m4a]' --audio-format mp3 --audio-quality 7 --retries 40 --no-cache-dir "aria2c" --external-downloader-args "-c -x 16 --timeout 8 --retry-wait 3 --file-allocation=none --allow-overwrite=false" -w --batch-file="${@}"
