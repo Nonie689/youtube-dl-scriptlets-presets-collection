@@ -21,5 +21,7 @@ yt-dlp --rm-cache-dir
 youtube-dl --rm-cache-dir
 
 cd "$download_path"
-youtube-dl --no-warnings --ignore-config --ignore-errors -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" --all-subs --no-cache-dir --retries 40 --yes-playlist -w --external-downloader "aria2c" --external-downloader-args "-c -x 16 --timeout 8 --retry-wait 3 --file-allocation=none --allow-overwrite=false" -x "$youtube_url" 
+while true; do
+   youtube-dl --no-warnings --ignore-config --ignore-errors -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" --all-subs --no-cache-dir --retries 40 --yes-playlist -w --external-downloader "aria2c" --external-downloader-args "-c -x 16 --timeout 8 --retry-wait 3 --file-allocation=none --allow-overwrite=false" -x "$youtube_url" && break
+done
 cd -
