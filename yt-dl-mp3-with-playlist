@@ -6,4 +6,4 @@ if ! ls $basedir/cookie_content.txt &> /dev/null ; then
 fi
 
 youtube-dl --rm-cache-dir
-youtube-dl --no-warnings --ignore-config --ignore-errors --audio-format  mp3 --audio-quality 7 --retries 40 --verbose --no-part --age-limit 16 --add-header $(cat $basedir/cookie_content.txt) --no-overwrites --no-cache-dir -x "${@}"
+youtube-dl --no-warnings --ignore-config --ignore-errors --audio-format mp3 --audio-quality 7 --retries 40 --no-part --age-limit 16 --add-header $(cat $basedir/cookie_content.txt) --no-overwrites --no-cache-dir  "aria2c" --external-downloader-args "-c -x 16 --timeout 8 --retry-wait 3 --file-allocation=none --allow-overwrite=false" --continue -w --yes-playlist -x "${@}"
