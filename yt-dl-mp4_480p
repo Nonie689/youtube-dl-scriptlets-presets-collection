@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 youtube-dl --rm-cache-dir
-youtube-dl --ignore-errors -f 'bestvideo[height=480][ext=mp4]+bestaudio[ext=m4a]/mp4' --all-subs --no-cache-dir -x "${@}"
+youtube-dl --ignore-errors -f 'bestvideo[height=480][ext=mp4]+bestaudio[ext=m4a]/mp4' --all-subs --no-cache-dir "${@}"
