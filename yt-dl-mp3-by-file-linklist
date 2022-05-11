@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 
-if test $(echo "${2}") ; then
-   youtube_url="${2}"
-   download_path="${1}"
-else
-   youtube_url="${1}"
-   download_path="$(pwd)"
+basedir=$(dirname $@)
+if ! ls $basedir/cookie_content.txt &> /dev/null ; then
+  python $basedir/get-session-cookie.py | awk '$1=$1' FS="': '" OFS=":" | awk  -F "'" '{print  $2 $3 $4 $5 $6}' | sed 's/, / --add-header /g' > $basedir/cookie_content.txt
 fi
 
 yt-dlp --rm-cache-dir
@@ -13,6 +10,5 @@ youtube-dl --rm-cache-dir
 
 cd download_path
 while true; do
-  youtube-dl --no-warnings --ignore-config --ignore-errors -f 'bestvideo[height=480][ext=mp4]+bestaudio[ext=m4a]' --audio-format mp3 --audio-quality 7 --retries 40 --no-cache-dir "aria2c" --external-downloader-args "-c -x 16 --timeout 8 --retry-wait 3 --file-allocation=none --allow-overwrite=false" -w --batch-file="${@}" && break
+  youtube-dl --no-warnings --ignore-config --ignore-errors --audio-format mp3 --retries 40 --no-part --age-limit 16 --add-header $(cat $basedir/cookie_content.txt) --no-cache-dir --continue --batch-file="${@}" && break
 done
-cd -
