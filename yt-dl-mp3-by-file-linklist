@@ -10,5 +10,5 @@ youtube-dl --rm-cache-dir
 
 cd download_path
 while true; do
-  youtube-dl --no-warnings --ignore-config --ignore-errors --audio-format mp3 --retries 40 --no-part --age-limit 16 --add-header $(cat $basedir/cookie_content.txt) --no-cache-dir --continue --batch-file="${@}" && break
+  youtube-dl --no-warnings --ignore-config --ignore-errors --audio-format mp3 --retries 40 --no-part --age-limit 16 --add-header $(cat $basedir/cookie_content.txt) --no-cache-dir --download-archive the_list.txt -x --continue --batch-file="${@}" && break
 done

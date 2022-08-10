@@ -3,10 +3,10 @@
 #yt-dlp -i -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/mp4" --recode-video mp4 --all-subs --no-cache-dir -x "${@}"
 #-f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4' --recode-video mp4
 if test $(echo "${2}") ; then
-   youtube_url="${2}"
+   channel_url="${2}"
    download_path="${1}"
 else
-   youtube_url="${1}"
+   channel_url="${1}"
    download_path="$(pwd)"
 fi
 
@@ -14,6 +14,6 @@ yt-dlp --rm-cache-dir
 youtube-dl --rm-cache-dir
 
 cd "$download_path"
-while true; do
-  yt-dlp --no-warnings --ignore-config --ignore-errors --all-subs --no-cache-dir --retries 40 -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best' --no-playlist "$youtube_url" && break
+while true ; do
+  yt-dlp --no-warnings --ignore-config --ignore-errors --no-cache-dir --retries 40 --embed-thumbnail --embed-metadata -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best' --download-archive the_list.txt "$channel_url" && break
 done

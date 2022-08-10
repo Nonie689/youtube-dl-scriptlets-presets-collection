@@ -10,13 +10,9 @@ fi
 
 yt-dlp --rm-cache-dir
 youtube-dl --rm-cache-dir
-basedir=$(dirname $1)
-if ! ls $basedir/cookie_content.txt &> /dev/null ; then
-  python $basedir/get-session-cookie.py | awk '$1=$1' FS="': '" OFS=":" | awk  -F "'" '{print  $2 $3 $4 $5 $6}' | sed 's/, / --add-header /g' > $basedir/cookie_content.txt
-fi
 
 cd download_path
 youtube-dl --rm-cache-dir
 while true; do
-  youtube-dl --no-warnings --ignore-config --ignore-errors --audio-format mp3 --audio-quality 7 --retries 40 --no-part --age-limit 16 --add-header $(cat $basedir/cookie_content.txt) --no-cache-dir --continue --yes-playlist -x "${@}" && break
+  youtube-dl --no-warnings --ignore-config --ignore-errors --audio-format mp3 --audio-quality 7 --retries 40 --no-part --age-limit 16  --no-cache-dir --download-archive the_list.txt --continue --yes-playlist -x "${@}" && break
 done

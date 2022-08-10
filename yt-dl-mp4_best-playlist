@@ -22,5 +22,5 @@ youtube-dl --rm-cache-dir
 
 cd "$download_path"
 while true; do
-   yt-dlp --no-warnings --ignore-config --ignore-errors --all-subs --no-cache-dir --retries 40 $(yt-dlp --flat-playlist --print url "$youtube_url") -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best' && break
+   yt-dlp --no-warnings --ignore-config --ignore-errors --all-subs --no-cache-dir --retries 40 $(yt-dlp --flat-playlist --print url "$youtube_url") --download-archive the_list.txt -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best' && break
 done

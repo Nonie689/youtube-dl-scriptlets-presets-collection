@@ -2,4 +2,4 @@
 url=$(echo ${@} | awk -F '&list=' '{print $1}')
 
 youtube-dl --rm-cache-dir
-youtube-dl --no-warnings --ignore-config -f 'bestaudio[ext=m4a]' --audio-format  mp3 --audio-quality 7 --retries 40 --no-cache-dir -x "${url}"
+youtube-dl --no-warnings --ignore-config -f 'bestaudio[ext=m4a]/mp3' -x --audio-format mp3 --audio-quality 7 --retries 40 --no-cache-dir "${url}"
